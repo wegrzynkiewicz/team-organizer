@@ -1,0 +1,16 @@
+{
+    "name": "etk-pl/team-organizer",
+    "description": "Prosty organizer dla spraw wewnętrznych",
+    "type": "project",
+    "license": "LicenseRef-LICENSE",
+    "authors": [
+        {
+            "name": "Łukasz Węgrzynkiewicz",
+            "email": "wegrzynkiewicz.lukasz@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.1"
+    }
+}

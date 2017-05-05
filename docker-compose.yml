@@ -1,0 +1,11 @@
+networks: {}
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/data
+version: '2.1'
+volumes: {}

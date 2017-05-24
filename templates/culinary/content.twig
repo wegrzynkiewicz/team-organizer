@@ -1,0 +1,62 @@
+{% extends "content.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            {% include "culinary/projections.twig" %}
+
+            <div class="well">
+                {% if projections | length == 0 %}
+                    <div class="text-center">Nikt się jeszcze nie zadeklarował</div>
+                {% elseif availableEmployees | length > 0 %}
+                    <h3>Kto się jeszcze nie zadeklarował:</h3>
+                    <ul>
+                        {% for employee in availableEmployees %}
+                            <li>{{ employee }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <div class="text-center">Wszystkie wprowadzone osoby już się zadeklarowały</div>
+                {% endif %}
+            </div>
+
+            {% if alreadyDeclared %}
+                <div class="well text-center">
+                    <p>Twoja deklaracja została już złożona</p>
+                    <a href="/culinary/cancel-declaration" type="submit" class="btn btn-primary">
+                        Cofnij deklarację
+                    </a>
+                </div>
+            {% else %}
+                {% include "culinary/form.twig" %}
+            {% endif %}
+
+            <div class="text-center">
+                {% for name, url in container.config.culinary.images %}
+                    <a href="{{ url }}" class="_gallery">{{ name }}</a>,
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body_scripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#persons").select2({
+                minimumResultsForSearch: -1,
+                tags: true
+            });
+            $("#restaurant").select2({
+                minimumResultsForSearch: -1
+            });
+            $('._gallery').magnificPopup({
+                type: 'image',
+                gallery: {
+                    enabled: true
+                }
+            });
+        });
+    </script>
+{% endblock %}

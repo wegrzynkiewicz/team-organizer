@@ -1,0 +1,70 @@
+<form action="" method="post" class="well">
+    <fieldset>
+        <legend>Wypełnij dane</legend>
+
+        <div class="form-group">
+            <label for="persons">
+                Imię i nazwisko
+            </label>
+            <select id="persons"
+                    name="persons[]"
+                    required="required"
+                    multiple="multiple"
+                    data-placeholder="Wybierz siebie z listy lub zadeklaruj więcej osób"
+                    class="form-control"
+                    style="width:100%">
+                {% for employee in availableEmployees %}
+                    <option>{{ employee }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="persons">
+                Restauracja
+            </label>
+            <select id="restaurant"
+                    name="restaurant"
+                    required="required"
+                    data-placeholder="Wybierz restaurację"
+                    class="form-control"
+                    style="width:100%">
+                <option></option>
+                {% for employee in container.config.culinary.restaurants %}
+                    <option>{{ employee }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="description">
+                Co chcesz zjeść?
+            </label>
+            <input id="description"
+                   name="description"
+                   type="text"
+                   required="required"
+                   placeholder="Wprowadź numer zamówienia i ewentualne dodatki"
+                   class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="description">
+                Cena zamówienia
+            </label>
+            <input id="price"
+                   name="price"
+                   type="number"
+                   step="0.01"
+                   required="required"
+                   placeholder="Wprowadź łączną cenę twojego zamówienia"
+                   class="form-control">
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">
+                Zadeklaruj się
+            </button>
+        </div>
+    </fieldset>
+</form>

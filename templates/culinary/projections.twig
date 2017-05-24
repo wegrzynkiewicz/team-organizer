@@ -1,0 +1,30 @@
+{% if projections | length > 0 %}
+    {% for projection in projections %}
+        <h3>{{ projection.getRestaurant() }}</h3>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Imię i nazwisko</th>
+                <th>Co chce zjeść?</th>
+                <th>Cena zamówienia</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for declaration in projection.getDeclarations() %}
+                <tr>
+                    <td>{{ declaration.getPersons() | join(", ") }}</td>
+                    <td>{{ declaration.getDescription() }}</td>
+                    <td class="text-right">{{ declaration.getPrice() | currency }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <th>Łącznie osób: {{ projection.totalPersons() }}</th>
+                <th></th>
+                <th class="text-right">{{ projection.totalPrice() | currency }}</th>
+            </tr>
+            </tfoot>
+        </table>
+    {% endfor %}
+{% endif %}

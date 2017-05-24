@@ -2,10 +2,19 @@
 
 declare(strict_types=1);
 
-require __DIR__.'/../vendor/autoload.php';
-require __DIR__.'/config.php';
-require __DIR__.'/functions.php';
+use RedCart\TeamOrganizer\Foundation\Container;
+use RedCart\TeamOrganizer\Provider\TwigServiceProvider;
+use RedCart\TeamOrganizer\Routing\AnnotationRouter;
 
-$method = strtolower($_SERVER['REQUEST_METHOD'] ?? 'GET');
+require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/functions.php';
+$config = require __DIR__ . '/config.php';
 
-require __DIR__."/routes/homepage/{$method}.php";
+session_start();
+
+$container = new Container();
+$container->set('config', $config);
+$container->registerProvider(new TwigServiceProvider($container));
+
+$router = new AnnotationRouter($container, VAR_PATH.'/routing.php');
+$router->executeControllerByRequest($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);

@@ -2,4 +2,4 @@
 
 declare(strict_types=1);
 
-require __DIR__.'/../src/start.php';
+require __DIR__ . '/../src/start.php';

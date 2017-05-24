@@ -11,6 +11,14 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": "^7.1"
+        "php": "^7.1",
+        "ext-json": "*",
+        "ext-mb_string": "*",
+        "twig/twig": "^2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "RedCart\\TeamOrganizer\\": "src/RedCart/TeamOrganizer"
+        }
     }
 }

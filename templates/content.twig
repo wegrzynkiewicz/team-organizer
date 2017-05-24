@@ -1,0 +1,19 @@
+{% extends "index.twig" %}
+{% block document %}
+
+    {% include "navbar/main.twig" %}
+
+    <div class="container">
+        {% if title %}
+            <h1 class="page-header">
+                {{ title }}
+            </h1>
+        {% endif %}
+
+        {% block content %}
+            <!-- block content -->
+        {% endblock %}
+    </div>
+
+{% endblock %}
+

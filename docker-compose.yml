@@ -1,11 +1,17 @@
 networks: {}
 services:
   app:
-    container_name: app
+    container_name: team_organizer_php
     build:
       context: .
       dockerfile: Dockerfile
+    ports:
+      - 8080:80
     volumes:
-      - .:/data
+      - ".:/var/www/html/:rw"
+      - "./etc/000-default.conf:/etc/apache2/sites-enabled/000-default.conf"
+      - "./etc/apache2.conf:/etc/apache2/apache2.conf"
+      - "./etc/php.ini:/usr/local/etc/php/php.ini"
+    restart: always
 version: '2.1'
 volumes: {}

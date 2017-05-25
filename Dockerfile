@@ -1,4 +1,4 @@
-FROM php:7.1.4-cli
+FROM php:7.1.5-apache
 
 RUN apt-get update && \
     apt-get install -y zlib1g-dev && \
@@ -8,6 +8,4 @@ RUN apt-get update && \
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php composer-setup.php --install-dir=/bin --filename=composer
 
-WORKDIR /data
-
-CMD ["/bin/bash"]
+RUN a2enmod rewrite

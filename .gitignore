@@ -1,9 +1,11 @@
 .idea
 /vendor/
 /var/*.*
-/var/culinary
+/var/logs/*
+!/var/logs/.gitkeep
+/var/culinary/*
 !/var/culinary/.gitkeep
-/var/sessions
+/var/sessions/*
 !/var/sessions/.gitkeep
-/var/twig-cache
+/var/twig-cache/*
 !/var/twig-cache/.gitkeep

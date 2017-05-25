@@ -25,6 +25,10 @@ return [
             'Naleśniki' => '/culinary/nalesniki.jpg',
             'Pierogi' => '/culinary/pierogi.jpg',
             'Placki ziemniaczane' => '/culinary/placki-ziemniaczane.jpg',
+            'Chińczyk 1' => '/culinary/chinczyk1.jpg',
+            'Chińczyk 2' => '/culinary/chinczyk2.jpg',
+            'Italia 1' => '/culinary/italia1.jpg',
+            'Italia 2' => '/culinary/italia2.jpg',
         ],
     ],
 ];

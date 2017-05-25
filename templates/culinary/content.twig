@@ -3,6 +3,25 @@
 {% block content %}
     <div class="row">
         <div class="col-lg-12">
+
+            <p class="text-center">
+                Przejrzyj dostępne dania:
+                {% for name, url in container.config.culinary.images %}
+                    <a href="{{ url }}" class="_gallery">{{ name }}</a>,
+                {% endfor %}
+            </p>
+
+            {% if alreadyDeclared %}
+                <div class="well text-center">
+                    <p>Twoja deklaracja została już złożona</p>
+                    <a href="/culinary/cancel-declaration" type="submit" class="btn btn-primary">
+                        Cofnij deklarację
+                    </a>
+                </div>
+            {% else %}
+                {% include "culinary/form.twig" %}
+            {% endif %}
+
             {% include "culinary/projections.twig" %}
 
             <div class="well">
@@ -18,23 +37,6 @@
                 {% else %}
                     <div class="text-center">Wszystkie wprowadzone osoby już się zadeklarowały</div>
                 {% endif %}
-            </div>
-
-            {% if alreadyDeclared %}
-                <div class="well text-center">
-                    <p>Twoja deklaracja została już złożona</p>
-                    <a href="/culinary/cancel-declaration" type="submit" class="btn btn-primary">
-                        Cofnij deklarację
-                    </a>
-                </div>
-            {% else %}
-                {% include "culinary/form.twig" %}
-            {% endif %}
-
-            <div class="text-center">
-                {% for name, url in container.config.culinary.images %}
-                    <a href="{{ url }}" class="_gallery">{{ name }}</a>,
-                {% endfor %}
             </div>
         </div>
     </div>

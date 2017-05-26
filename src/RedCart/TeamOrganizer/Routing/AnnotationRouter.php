@@ -112,7 +112,7 @@ class AnnotationRouter
             $reflectionClass = new ReflectionClass($class);
             $methods = $reflectionClass->getMethods();
             foreach ($methods as $method) {
-                $docComment = $method->getDocComment();
+                $docComment = (string)$method->getDocComment();
                 if (preg_match_all("~@route ([A-Z]+) (.*)~", $docComment, $matches, PREG_SET_ORDER)) {
                     foreach ($matches as $match) {
                         $requestMethod = strtoupper($match[1]);

@@ -32,7 +32,7 @@ class TwigServiceProvider implements ServiceProviderInterface
         $options = [];
 
         if (!DEBUG) {
-            $options['cache'] = VAR_PATH . '/twig-cache';
+            $options['cache'] = VAR_PATH.'/twig-cache';
         }
 
         $twig = new Twig_Environment($loader, $options);

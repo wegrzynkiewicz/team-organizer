@@ -18,7 +18,7 @@ class CulinaryDaysRepository
     public function __construct()
     {
         $this->now = date('Y-m-d');
-        $this->filepath = VAR_PATH . "/culinary/{$this->now}.json";
+        $this->filepath = VAR_PATH."/culinary/{$this->now}.json";
 
         if (!is_readable($this->filepath)) {
             $this->saveDeclarationsToFile();

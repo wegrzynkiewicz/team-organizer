@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace RedCart\TeamOrganizer\Routing\Exception;
 
 use RedCart\TeamOrganizer\Exception\AbstractException;

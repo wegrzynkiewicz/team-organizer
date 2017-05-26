@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace RedCart\TeamOrganizer\Routing;
 
 use RedCart\TeamOrganizer\Foundation\AbstractController;
@@ -34,6 +36,7 @@ class AnnotationRouter
 
     /**
      * SegmentRouter constructor.
+     *
      * @param $routesFile string Absolutna ścieżka do pliku zawierającego ścieżki routingu
      * @param Container $container
      */
@@ -94,7 +97,7 @@ class AnnotationRouter
     public function parseControllerAnnotations()
     {
         // załaduj wszystkie pliki które kończą się na Controller.php
-        $files = globRecursive(SOURCE_PATH . '/*Controller.php');
+        $files = globRecursive(SOURCE_PATH.'/*Controller.php');
         foreach ($files as $file) {
             include_once $file;
         }

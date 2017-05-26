@@ -17,6 +17,7 @@ function exportVariable2PHPFile(array $data, $file)
     $content = "<?php\n\n/** @generated {$date} */\n\nreturn {$export};";
     file_put_contents($file, $content);
 }
+
 /**
  * Wyszukuje plików na dysku
  *
@@ -27,11 +28,12 @@ function exportVariable2PHPFile(array $data, $file)
 function globRecursive($pattern, $flags = 0)
 {
     $files = glob($pattern, $flags);
-    foreach (glob(dirname($pattern) . '/*', GLOB_ONLYDIR | GLOB_NOSORT) as $dir) {
-        $files = array_merge($files, globRecursive($dir . '/' . basename($pattern), $flags));
+    foreach (glob(dirname($pattern).'/*', GLOB_ONLYDIR | GLOB_NOSORT) as $dir) {
+        $files = array_merge($files, globRecursive($dir.'/'.basename($pattern), $flags));
     }
     return $files;
 }
+
 /**
  * Tworzy rekursywnie katalogi w ścieżce
  *
@@ -48,13 +50,14 @@ function makeDirsRecursive($path, $mode = 0777)
     $dirs = explode('/', $path);
     $dir = '';
     foreach ($dirs as $part) {
-        $dir .= $part . '/';
+        $dir .= $part.'/';
         if (is_dir($dir)) {
             continue;
         }
         mkdir($dir, $mode);
     }
 }
+
 /**
  * Tworzy plik oraz katalogi, jeżeli ich brakuje
  *
@@ -74,7 +77,7 @@ function makeFile($filepath, $mode = 0775)
 function redirect(string $url, int $code): void
 {
     http_response_code($code);
-    header ("Location: {$url}");
+    header("Location: {$url}");
 
     exit;
 }

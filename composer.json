@@ -1,6 +1,6 @@
 {
     "name": "etk-pl/team-organizer",
-    "description": "Prosty organizer dla spraw wewnętrznych",
+    "description": "Prosta aplikacja dla organizacji zespołu w sprawach wewnętrznych",
     "type": "project",
     "license": "LicenseRef-LICENSE",
     "authors": [

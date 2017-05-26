@@ -1,7 +1,7 @@
 networks: {}
 services:
-  app:
-    container_name: team_organizer_php
+  team_organizer_apache_xdebug:
+    container_name: team_organizer_apache_xdebug
     build:
       context: .
       dockerfile: Dockerfile

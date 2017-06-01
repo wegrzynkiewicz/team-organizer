@@ -1,0 +1,30 @@
+{% set id = block('id') is defined ? block('id') : block('name') %}
+{% set selected = block('selected') is defined ? block('selected') : '' %}
+
+<div class="form-group">
+    <label for="{{ id }}">
+        {% block title '' %}
+    </label>
+    <select
+            id="{{ id }}"
+            name="{% block name '' %}"
+            class="form-control {% block class '' %}"
+            style="width:100%; {% block style '' %}"
+            {% block attributes '' %}>
+        <option {{ selected ? '' : 'selected="selected"' }}></option>
+        {% for key, value in options %}
+            <option value="{{ key }}"
+                {{ selected == key ? 'selected="selected"' : '' }}>
+                {{- value -}}
+            </option>
+        {% endfor %}
+    </select>
+</div>
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        $("#{{ id }}").select2({
+            minimumResultsForSearch: -1
+        });
+    });
+</script>

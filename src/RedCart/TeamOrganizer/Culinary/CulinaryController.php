@@ -38,7 +38,7 @@ class CulinaryController extends AbstractController
 
         $alreadyDeclared = $repository->hasDeclarationByUUID($_SESSION['culinary-declaration'] ?? '');
 
-        $this->get('twig')->display('culinary/content.twig', [
+        $this->get('twig')->display('culinary/declarations.twig', [
             'title' => 'Kulinarne piątki',
             'projections' => $projections,
             'availableEmployees' => $availableEmployees,

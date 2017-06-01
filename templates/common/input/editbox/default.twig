@@ -1,0 +1,15 @@
+{% set id = block('id') is defined ? block('id') : block('name') %}
+
+<div class="form-group">
+    <label for="{{ id }}">
+        {% block title '' %}
+    </label>
+    <input
+            id="{{ id }}"
+            name="{% block name '' %}"
+            class="form-control {% block class '' %}"
+            style="{% block style '' %}"
+            {% block attributes '' %}
+            type="{{ block('type') | default('text') }}"
+            value="{% block value '' %}">
+</div>

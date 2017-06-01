@@ -1,0 +1,25 @@
+{% set id = block('id') is defined ? block('id') : block('name') %}
+
+<div class="form-group">
+    <label for="{{ id }}">
+        {% block title '' %}
+    </label>
+    <textarea
+            id="{{ id }}"
+            name="{% block name '' %}"
+            class="form-control {% block class '' %}"
+            style="overflow: hidden; resize: none; {% block style '' %}"
+            {% block attributes '' %}
+            >
+        {%- block value '' -%}
+    </textarea>
+</div>
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        $('#{{ id }}').autogrow({
+            vertical: true,
+            horizontal: false
+        });
+    });
+</script>

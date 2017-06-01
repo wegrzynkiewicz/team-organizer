@@ -12,8 +12,8 @@
             <tbody>
             {% for declaration in projection.getDeclarations() %}
                 <tr>
-                    <td>{{ declaration.getPersons() | join(", ") }}</td>
-                    <td>{{ declaration.getDescription() }}</td>
+                    <td>{{ declaration.getPersons() | join("\n") | nl2br() }}</td>
+                    <td>{{ declaration.getDescription() | nl2br() }}</td>
                     <td class="text-right">{{ declaration.getPrice() | currency }}</td>
                 </tr>
             {% endfor %}

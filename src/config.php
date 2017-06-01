@@ -16,9 +16,9 @@ return [
     'employees' => require_once RESOURCES_PATH.'/employees.php',
     'culinary' => [
         'restaurants' => [
-            'Chińczyk',
-            'Naleśnikarnia',
-            'Pizzeria Italia',
+            'chinczyk' => 'Chińczyk',
+            'nalesnikarnia' => 'Naleśnikarnia',
+            'pizzeria-italia' => 'Pizzeria Italia',
         ],
         'images' => [
             'Gofry' => '/culinary/gofry.jpg',

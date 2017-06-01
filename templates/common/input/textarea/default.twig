@@ -1,4 +1,5 @@
 {% set id = block('id') is defined ? block('id') : block('name') %}
+{% set value = block('value') is defined ? block('value') : request[block('name')] %}
 
 <div class="form-group">
     <label for="{{ id }}">
@@ -8,10 +9,10 @@
             id="{{ id }}"
             name="{% block name '' %}"
             class="form-control {% block class '' %}"
-            style="overflow: hidden; resize: none; {% block style '' %}"
+            style="overflow: hidden; resize: none; min-height: 34px; {% block style '' %}"
             {% block attributes '' %}
             >
-        {%- block value '' -%}
+        {{- value -}}
     </textarea>
 </div>
 

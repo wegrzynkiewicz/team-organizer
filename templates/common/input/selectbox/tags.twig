@@ -11,9 +11,13 @@
             style="width:100%; {% block style '' %}"
             {% block attributes '' %}
             multiple="multiple">
-        {% for key, value in options %}
-            <option value="{{ key }}"
-                    {{ key in selected ? 'selected="selected"' : '' }}>
+        {% for value in options %}
+            <option {{ value in selected ? 'selected="selected"' : '' }}>
+                {{- value -}}
+            </option>
+        {% endfor %}
+        {% for value in selected %}
+            <option value="{{ value }}" selected="selected">
                 {{- value -}}
             </option>
         {% endfor %}

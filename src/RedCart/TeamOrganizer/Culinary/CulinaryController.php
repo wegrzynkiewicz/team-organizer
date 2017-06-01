@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace RedCart\TeamOrganizer\Culinary;
 
+use RedCart\TeamOrganizer\Culinary\Exception\InvalidDeclaration;
 use RedCart\TeamOrganizer\Foundation\AbstractController;
 
 class CulinaryController extends AbstractController
@@ -13,48 +14,38 @@ class CulinaryController extends AbstractController
      */
     public function index()
     {
+        $out['title'] = 'Kulinarne piątki';
+
         $repository = new CulinaryDaysRepository();
         $declarations = $repository->getDeclarations();
-        $availableEmployees = $this->get('config')['employees'];
 
-        $projections = [];
-        foreach ($declarations as $declaration) {
-            // usuń pracowników, którzy już się zadeklarowali
-            foreach ($declaration->getPersons() as $person) {
-                if (in_array($person, $availableEmployees)) {
-                    $key = array_search($person, $availableEmployees);
-                    unset($availableEmployees[$key]);
-                }
-            }
-            // grupuj deklaracje po restauracji
-            $projections[$declaration->getRestaurant()][] = $declaration;
+        $out['undeclaredEmployees'] = $this->getUndeclaredEmployee($declarations);
+        $out['projections'] = $this->getProjections($declarations);
+
+        try {
+            $out['request'] = $repository->getDeclarationByUUID($_SESSION['culinary-declaration'])->toArray();
+            $out['alreadyDeclared'] = true;
+        } catch(InvalidDeclaration $exception) {
+            // nothing
         }
 
-        $projections = array_map(function ($declarations, $key) {
-            $projection = new Projection($key);
-            $projection->addDeclarations($declarations);
-            return $projection;
-        }, $projections, array_keys($projections));
-
-        $alreadyDeclared = $repository->hasDeclarationByUUID($_SESSION['culinary-declaration'] ?? '');
-
-        $this->get('twig')->display('culinary/declarations.twig', [
-            'title' => 'Kulinarne piątki',
-            'projections' => $projections,
-            'availableEmployees' => $availableEmployees,
-            'alreadyDeclared' => $alreadyDeclared,
-        ]);
+        $this->get('twig')->display('culinary/declarations.twig', $out);
     }
 
     /**
      * @route POST /
      */
-    public function insertDeclaration()
+    public function replaceDeclaration()
     {
         $declaration = new Declaration($_POST);
         $repository = new CulinaryDaysRepository();
-        $uuid = $repository->insertDeclaration($declaration);
-        $_SESSION['culinary-declaration'] = $uuid;
+
+        if ($repository->hasDeclarationByUUID($_SESSION['culinary-declaration'] ?? '')) {
+            $repository->updateDeclarationByUUID($declaration, $_SESSION['culinary-declaration']);
+        } else {
+            $uuid = $repository->insertDeclaration($declaration);
+            $_SESSION['culinary-declaration'] = $uuid;
+        }
 
         redirect('/', 303);
     }
@@ -71,5 +62,48 @@ class CulinaryController extends AbstractController
         }
 
         redirect('/', 204);
+    }
+
+    /**
+     * Zwraca zgrupowane deklaracje po restauracji
+     *
+     * @param $declarations Declaration[]
+     * @return array
+     */
+    protected function getProjections($declarations): array
+    {
+        $projections = [];
+        foreach ($declarations as $declaration) {
+            $projections[$declaration->getRestaurant()][] = $declaration;
+        }
+
+        $projections = array_map(function ($declarations, $restaurant) {
+            $projection = new Projection($restaurant);
+            $projection->addDeclarations($declarations);
+            return $projection;
+        }, $projections, array_keys($projections));
+
+        return $projections;
+    }
+
+    /**
+     * Zwraca tablicę pracowników którzy jeszcze się niezadeklarowali
+     *
+     * @param $declarations Declaration[]
+     * @return array
+     */
+    protected function getUndeclaredEmployee($declarations): array
+    {
+        $undeclaredEmployees = $this->get('config')['employees'];
+        foreach ($declarations as $declaration) {
+            foreach ($declaration->getPersons() as $person) {
+                if (in_array($person, $undeclaredEmployees)) {
+                    $key = array_search($person, $undeclaredEmployees);
+                    unset($undeclaredEmployees[$key]);
+                }
+            }
+        }
+
+        return $undeclaredEmployees;
     }
 }

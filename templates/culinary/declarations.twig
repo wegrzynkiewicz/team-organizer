@@ -12,15 +12,22 @@
             </p>
 
             {% if alreadyDeclared %}
-                <div class="well text-center">
+                <div id="already-declared" class="well text-center">
                     <p>Twoja deklaracja została już złożona</p>
-                    <a href="/culinary/cancel-declaration" type="submit" class="btn btn-primary">
+
+                    <a href="/culinary/cancel-declaration" type="submit" class="btn btn-warning">
                         Cofnij deklarację
                     </a>
+
+                    <a id="edit-declaration" href="#" type="submit" class="btn btn-primary">
+                        Edytuj deklarację
+                    </a>
                 </div>
-            {% else %}
-                {% include "culinary/form.twig" %}
             {% endif %}
+
+            <div id="form" class="well" style="{{ alreadyDeclared ? 'display: none;' : '' }}">
+                {% include "culinary/form.twig" %}
+            </div>
 
             {% include "culinary/projections.twig" %}
 
@@ -51,6 +58,10 @@
                 gallery: {
                     enabled: true
                 }
+            });
+            $('#edit-declaration').click(function () {
+                $('#form').show();
+                $('#already-declared').hide();
             });
         });
     </script>

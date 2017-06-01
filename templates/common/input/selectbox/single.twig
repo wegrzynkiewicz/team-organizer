@@ -1,5 +1,5 @@
 {% set id = block('id') is defined ? block('id') : block('name') %}
-{% set selected = block('selected') is defined ? block('selected') : '' %}
+{% set selected = block('selected') is defined ? block('selected') : request[block('name')] %}
 
 <div class="form-group">
     <label for="{{ id }}">

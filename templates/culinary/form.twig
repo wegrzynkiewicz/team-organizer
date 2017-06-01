@@ -1,8 +1,8 @@
-<form action="" method="post" class="well">
+<form action="" method="post">
     <fieldset>
         <legend>Wypełnij dane</legend>
 
-        {% embed 'common/input/selectbox/multiple.twig' with {"options": availableEmployees} %}
+        {% embed 'common/input/selectbox/tags.twig' with {"options": availableEmployees, "selected": request.persons} %}
             {% block id 'persons' %}
             {% block name 'persons[]' %}
             {% block title 'Imię i nazwisko' %}
@@ -14,7 +14,7 @@
 
         {% embed 'common/input/selectbox/single.twig' with {"options": container.config.culinary.restaurants} %}
             {% block name 'restaurant' %}
-            {% block title 'Co chcesz zjeść?' %}
+            {% block title 'Restauracja' %}
             {% block attributes %}
                 required="required"
                 data-placeholder="Wybierz restaurację"

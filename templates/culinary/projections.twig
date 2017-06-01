@@ -1,6 +1,6 @@
 {% if projections | length > 0 %}
     {% for projection in projections %}
-        <h3>{{ projection.getRestaurant() }}</h3>
+        <h3>{{ container.config.culinary.restaurants[projection.getRestaurant()] }}</h3>
         <table class="table table-bordered">
             <thead>
             <tr>

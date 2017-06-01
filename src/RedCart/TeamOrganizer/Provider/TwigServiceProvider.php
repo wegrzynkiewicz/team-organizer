@@ -37,6 +37,7 @@ class TwigServiceProvider implements ServiceProviderInterface
 
         $twig = new Twig_Environment($loader, $options);
         $twig->addGlobal('container', $this->container);
+        $twig->addGlobal('request', $_REQUEST);
         $twig->addFilter(new Twig_Filter('currency', function ($value) {
             return number_format(floatval($value), 2, '.', ' ').' zł';
         }));

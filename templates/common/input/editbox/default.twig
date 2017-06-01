@@ -1,4 +1,5 @@
 {% set id = block('id') is defined ? block('id') : block('name') %}
+{% set value = block('value') is defined ? block('value') : request[block('name')] %}
 
 <div class="form-group">
     <label for="{{ id }}">
@@ -11,5 +12,5 @@
             style="{% block style '' %}"
             {% block attributes '' %}
             type="{{ block('type') | default('text') }}"
-            value="{% block value '' %}">
+            value="{{ value }}">
 </div>

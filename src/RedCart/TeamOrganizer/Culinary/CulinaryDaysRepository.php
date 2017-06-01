@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace RedCart\TeamOrganizer\Culinary;
 
+use RedCart\TeamOrganizer\Culinary\Exception\InvalidDeclaration;
+
 class CulinaryDaysRepository
 {
     /** @var string Teraźniejsza data */
@@ -25,6 +27,18 @@ class CulinaryDaysRepository
         }
 
         $this->loadPersonsFromFile();
+    }
+
+    public function getDeclarationByUUID(string $declarationUUID)
+    {
+        if (!$this->hasDeclarationByUUID($declarationUUID)) {
+            throw new InvalidDeclaration(sprintf(
+                'Declaration with uuid (%s) does not exits',
+                $declarationUUID
+            ));
+        }
+
+        return $this->declarations[$declarationUUID] ?? [];
     }
 
     /**
@@ -53,6 +67,12 @@ class CulinaryDaysRepository
     public function hasDeclarationByUUID(string $declarationUUID): bool
     {
         return isset($this->declarations[$declarationUUID]);
+    }
+
+    public function updateDeclarationByUUID(Declaration $declaration, string $declarationUUID): void
+    {
+        $this->declarations[$declarationUUID] = $declaration;
+        $this->saveDeclarationsToFile();
     }
 
     private function saveDeclarationsToFile(): void

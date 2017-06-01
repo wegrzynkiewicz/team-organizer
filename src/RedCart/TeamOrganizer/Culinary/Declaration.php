@@ -33,7 +33,7 @@ class Declaration implements JsonSerializable
         $this->price = floatval($data['price']) ?? 0.0;
     }
 
-    function jsonSerialize()
+    public function toArray()
     {
         return [
             'persons' => $this->persons,
@@ -41,6 +41,11 @@ class Declaration implements JsonSerializable
             'description' => $this->description,
             'price' => $this->price,
         ];
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->toArray();
     }
 
     /**

@@ -34,10 +34,10 @@
             <div class="well">
                 {% if projections | length == 0 %}
                     <div class="text-center">Nikt się jeszcze nie zadeklarował</div>
-                {% elseif availableEmployees | length > 0 %}
+                {% elseif undeclaredEmployees | length > 0 %}
                     <h3>Kto się jeszcze nie zadeklarował:</h3>
                     <ul>
-                        {% for employee in availableEmployees %}
+                        {% for employee in undeclaredEmployees %}
                             <li>{{ employee }}</li>
                         {% endfor %}
                     </ul>

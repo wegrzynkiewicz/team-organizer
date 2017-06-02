@@ -2,7 +2,7 @@
     <fieldset>
         <legend>Wypełnij dane</legend>
 
-        {% embed 'common/input/selectbox/tags.twig' with {"options": availableEmployees, "selected": request.persons} %}
+        {% embed 'common/input/selectbox/tags.twig' with {"options": undeclaredEmployees, "selected": request.persons} %}
             {% block id 'persons' %}
             {% block name 'persons[]' %}
             {% block title 'Imię i nazwisko' %}

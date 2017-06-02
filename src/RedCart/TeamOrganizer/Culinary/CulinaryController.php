@@ -23,10 +23,10 @@ class CulinaryController extends AbstractController
         $out['projections'] = $this->getProjections($declarations);
 
         try {
-            $out['request'] = $repository->getDeclarationByUUID($_SESSION['culinary-declaration'])->toArray();
+            $out['request'] = $repository->getDeclarationByUUID($_SESSION['culinary-declaration'] ?? '')->toArray();
             $out['alreadyDeclared'] = true;
         } catch(InvalidDeclaration $exception) {
-            // nothing
+            $out['alreadyDeclared'] = false;
         }
 
         $this->get('twig')->display('culinary/declarations.twig', $out);

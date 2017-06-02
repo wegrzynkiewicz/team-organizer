@@ -9,18 +9,9 @@
             id="{{ id }}"
             name="{% block name '' %}"
             class="form-control {% block class '' %}"
-            style="overflow: hidden; resize: none; min-height: 34px; {% block style '' %}"
+            style="resize: vertical; min-height: 100px; {% block style '' %}"
             {% block attributes '' %}
             >
         {{- value -}}
     </textarea>
 </div>
-
-<script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function () {
-        $('#{{ id }}').autogrow({
-            vertical: true,
-            horizontal: false
-        });
-    });
-</script>

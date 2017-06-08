@@ -14,5 +14,21 @@
                 {{ container.config.projectName }}
             </a>
         </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/culinary">Kulinarne piątki</a>
+                </li>
+                <li>
+                    <a href="/dishwasher">Zmywarka</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        $('#navbar').find('a[href="' + this.location.pathname + '"]').parent().addClass('active');
+    });
+</script>

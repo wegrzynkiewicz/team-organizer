@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace RedCart\TeamOrganizer\Provider;
 
+use DateTime;
 use Redcart\TeamOrganizer\Foundation\Container;
 use RedCart\TeamOrganizer\Foundation\ServiceProviderInterface;
 use Twig_Environment;
@@ -40,6 +41,20 @@ class TwigServiceProvider implements ServiceProviderInterface
         $twig->addGlobal('request', $_REQUEST);
         $twig->addFilter(new Twig_Filter('currency', function ($value) {
             return number_format(floatval($value), 2, '.', ' ').' zł';
+        }));
+        $twig->addFilter(new Twig_Filter('format', function ($value) {
+            if ($value instanceof DateTime) {
+                $weeks = [
+                    'Niedziela',
+                    'Poniedziałek',
+                    'Wtorek',
+                    'Środa',
+                    'Czwartek',
+                    'Piątek',
+                    'Sobota',
+                ];
+                return $value->format('Y-m-d').' '.$weeks[$value->format('w')];
+            }
         }));
 
         if (DEBUG) {

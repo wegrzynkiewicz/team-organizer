@@ -1,0 +1,46 @@
+{% extends "content.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="alert alert-info text-center">
+                Osoba, która powinna wyciągnąć naczynia ze zmywarki znajduje się na samej górze tabeli.<br/>
+                Jeżeli ktoś wyciągnął naczynia, należy nacisnąć odpowiedni przycisk "Odznacz".
+            </p>
+            <form action="/dishwasher" method="post">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Imię i nazwisko</th>
+                        <th>Ostatnia data dopełnienia obowiązku</th>
+                        <th>Ilość zasług</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for employee, data in projection %}
+                        <tr>
+                            <td>{{ employee }}</td>
+                            <td>{{ data.newestDate | format }}</td>
+                            <td>{{ data.countDates | default(0) }}</td>
+                            <td class="text-center">
+                                <button name="employee"
+                                        type="submit"
+                                        value="{{ employee }}"
+                                        {% if canMark %}
+                                            title="Oznacz, że ta osoba wyciągnęła naczynia ze zmywarki"
+                                        {% else %}
+                                            title="Dzisiaj naczynia zostały już wyciągnięte"
+                                            disabled="disabled"
+                                        {% endif %}
+                                        class="btn btn-primary btn-xs">
+                                    Odznacz
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </form>
+        </div>
+    </div>
+{% endblock %}

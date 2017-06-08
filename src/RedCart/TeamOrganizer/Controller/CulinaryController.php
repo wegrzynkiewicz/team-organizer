@@ -2,15 +2,18 @@
 
 declare(strict_types=1);
 
-namespace RedCart\TeamOrganizer\Culinary;
+namespace RedCart\TeamOrganizer\Controller;
 
+use RedCart\TeamOrganizer\Culinary\CulinaryDaysRepository;
+use RedCart\TeamOrganizer\Culinary\Declaration;
 use RedCart\TeamOrganizer\Culinary\Exception\InvalidDeclaration;
+use RedCart\TeamOrganizer\Culinary\Projection;
 use RedCart\TeamOrganizer\Foundation\AbstractController;
 
 class CulinaryController extends AbstractController
 {
     /**
-     * @route GET /
+     * @route GET /culinary
      */
     public function index()
     {
@@ -29,11 +32,11 @@ class CulinaryController extends AbstractController
             $out['alreadyDeclared'] = false;
         }
 
-        $this->get('twig')->display('culinary/declarations.twig', $out);
+        $this->get('twig')->display('views/culinary/context.twig', $out);
     }
 
     /**
-     * @route POST /
+     * @route POST /culinary
      */
     public function replaceDeclaration()
     {

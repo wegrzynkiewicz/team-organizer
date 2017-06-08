@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12">
 
-            <p class="text-center">
+            <p class="well text-center">
                 Przejrzyj dostępne dania:
                 {% for name, url in container.config.culinary.images %}
                     <a href="{{ url }}" class="_gallery">{{ name }}</a>,
@@ -26,10 +26,10 @@
             {% endif %}
 
             <div id="form" class="well" style="{{ alreadyDeclared ? 'display: none;' : '' }}">
-                {% include "culinary/form.twig" %}
+                {% include "views/culinary/form.twig" %}
             </div>
 
-            {% include "culinary/projections.twig" %}
+            {% include "views/culinary/projections.twig" %}
 
             <div class="well">
                 {% if projections | length == 0 %}
@@ -52,7 +52,7 @@
 {% block body_scripts %}
     {{ parent() }}
     <script type="text/javascript">
-        $(document).ready(function () {
+        document.addEventListener("DOMContentLoaded", function () {
             $('._gallery').magnificPopup({
                 type: 'image',
                 gallery: {

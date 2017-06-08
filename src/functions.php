@@ -28,8 +28,8 @@ function exportVariable2PHPFile(array $data, $file)
 function globRecursive($pattern, $flags = 0)
 {
     $files = glob($pattern, $flags);
-    foreach (glob(dirname($pattern).'/*', GLOB_ONLYDIR | GLOB_NOSORT) as $dir) {
-        $files = array_merge($files, globRecursive($dir.'/'.basename($pattern), $flags));
+    foreach (glob(dirname($pattern) . '/*', GLOB_ONLYDIR | GLOB_NOSORT) as $dir) {
+        $files = array_merge($files, globRecursive($dir . '/' . basename($pattern), $flags));
     }
     return $files;
 }
@@ -50,7 +50,7 @@ function makeDirsRecursive($path, $mode = 0777)
     $dirs = explode('/', $path);
     $dir = '';
     foreach ($dirs as $part) {
-        $dir .= $part.'/';
+        $dir .= $part . '/';
         if (is_dir($dir)) {
             continue;
         }
@@ -71,7 +71,7 @@ function makeFile($filepath, $mode = 0775)
     if (!file_exists($filepath)) {
         touch($filepath);
     }
-    chmod($filepath, $mode);
+    @chmod($filepath, $mode);
 }
 
 function redirect(string $url, int $code): void
@@ -80,4 +80,9 @@ function redirect(string $url, int $code): void
     header("Location: {$url}");
 
     exit;
+}
+
+function array_unchunk(array $array)
+{
+    return call_user_func_array('array_merge', $array);
 }

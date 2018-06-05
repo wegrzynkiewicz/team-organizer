@@ -50,7 +50,7 @@ class CulinaryController extends AbstractController
             $_SESSION['culinary-declaration'] = $uuid;
         }
 
-        redirect('/', 303);
+        redirect('/culinary', 303);
     }
 
     /**
@@ -64,7 +64,7 @@ class CulinaryController extends AbstractController
             $repository->removeDeclarationByUUID($uuid);
         }
 
-        redirect('/', 204);
+        redirect('/culinary', 204);
     }
 
     /**

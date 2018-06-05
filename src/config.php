@@ -19,6 +19,9 @@ return [
             'chinczyk' => 'Chińczyk',
             'nalesnikarnia' => 'Naleśnikarnia',
             'pizzeria-italia' => 'Pizzeria Italia',
+            'da-grasso' => 'Pizzeria Da Grasso',
+            'mamuski' => 'Restauracja Mamuśki',
+            'kfc' => 'Kentucky Fried Chicken',
         ],
         'images' => [
             'Gofry' => '/assets/culinary/gofry.jpg',
@@ -29,6 +32,10 @@ return [
             'Chińczyk 2' => '/assets/culinary/chinczyk2.jpg',
             'Italia 1' => '/assets/culinary/italia1.jpg',
             'Italia 2' => '/assets/culinary/italia2.jpg',
+            'Mamuśki 1' => '/assets/culinary/mamuski1.jpg',
+            'Mamuśki 2' => '/assets/culinary/mamuski2.jpg',
+            'Da Grasso 1' => '/assets/culinary/da-grasso1.jpg',
+            'Da Grasso 2' => '/assets/culinary/da-grasso2.jpg',
         ],
     ],
 ];

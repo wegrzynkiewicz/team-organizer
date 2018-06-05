@@ -41,7 +41,17 @@
             {% endblock %}
         {% endembed %}
 
-        <div class="text-center">
+        <div class="checkbox text-center" style="padding:20px 0">
+            <label data-toggle="collapse" data-target="#collapseOne">
+                <input type="checkbox"/>
+                Wyrażam zgodę na przetwarzanie moich danych osobowych i preferencji kulinarnych
+                dla potrzeb niezbędnych do realizacji procesu zamawiania żarcia na kulinarne piątki <br/>
+                (zgodnie z Ustawą z dnia 29.08.1997 roku o Ochronie Danych Osobowych; tekst jednolity:
+                Dz. U. z 2002r. Nr 101, poz. 926 ze zm.)
+            </label>
+        </div>
+
+        <div id="collapseOne" class="text-center collapse">
             <button type="submit" class="btn btn-primary">
                 Zadeklaruj się
             </button>

@@ -80,7 +80,6 @@ class CulinaryDaysRepository
         ksort($this->declarations);
         $json = json_encode($this->declarations, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
         file_put_contents($this->filepath, $json);
-        chmod($this->filepath, 0777);
     }
 
     private function loadPersonsFromFile(): void
